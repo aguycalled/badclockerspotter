@@ -77,9 +77,11 @@ sock.on('message', (topic, message) => {
       count[address].lastBlock = block.header.hash;
 
       table = new Table({head: ["Address", "Count", "Version", "Last Block"]});
-      var ar = [];
+      var ar = []; var i = 0;
       for(var k in count) {
-        ar.push([k, count[k].count, count[address].version.split(";")[1], count[address].lastBlock])
+        ar.push([k, count[k].count, count[k].version.split(";")[1], count[k].lastBlock])
+        if(i > 24) break;
+        i++;
       }
       ar.sort(function(a, b) {
         return b[1] - a[1];
